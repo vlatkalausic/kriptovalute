@@ -1,0 +1,138 @@
+﻿@model BitcoinBlockExplorer.Models.Block
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1></h1>
+
+<div>
+    <br /><br />
+          <h4>Block <span style="color: #1E90FF">@Model.height</span></h4>
+          
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Hash:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.hash)
+        </dd>
+        <dt class="col-sm-2">
+            Confirmations:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.confirmations)
+        </dd>
+        <dt class="col-sm-2">
+            Timestamp:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.time)
+        </dd>
+        <dt class="col-sm-2">
+            Height:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.height)
+        </dd>
+        <dt class="col-sm-2">
+            Miner:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.miner)
+        </dd>
+        <dt class="col-sm-2">
+            Number of transactions:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nTx)
+        </dd>
+        <dt class="col-sm-2">
+            Difficulty:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.difficulty)
+        </dd>
+        <dt class="col-sm-2">
+            Merkle root:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.merkleroot)
+        </dd>
+        <dt class="col-sm-2">
+            Version:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.version)
+        </dd>
+        <dt class="col-sm-2">
+            Version Hex:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.versionHex)
+        </dd>
+        <dt class="col-sm-2">
+            Bits:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.bits)
+        </dd>
+        <dt class="col-sm-2">
+            Weight:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.weight) WU
+        </dd>
+        <dt class="col-sm-2">
+            Size:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.size) bytes
+        </dd>
+        <dt class="col-sm-2">
+            Nonce:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nonce)
+        </dd>
+        <dt class="col-sm-2">
+            Transaction volume:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.transactionVolume)
+        </dd>
+        <dt class="col-sm-2">
+            Block reward:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.blockReward)
+        </dd>
+        <dt class="col-sm-2">
+            Fee reward:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.feeReward)
+        </dd>
+        <dt class="col-sm-2">
+            Previous block hash:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.previousblockhash)
+        </dd>
+        <dt class="col-sm-2">
+            Next block hash:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nextblockhash)
+        </dd>
+    </dl>
+</div>
+
+
+<style type="text/css">
+    dd {
+        color: darkorange;
+      
+    }
+</style>
