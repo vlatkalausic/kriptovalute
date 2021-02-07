@@ -22,7 +22,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BitcoinBlockExplorer</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BitcoinBlockExplorer - Vlatka Laušić </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,7 +46,7 @@
            <div class="search-container">
                 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
                 {
-                    <input type="text" placeholder="Search.." name="search" style="  width: 600px;border: 3px solid #1E90FF;">
+                    <input type="text" placeholder=" Search address, transaction hash, block height or hash ..." name="search" style="  width: 600px;border: 3px solid #1E90FF;">
                     <button type="submit" style="border:3px solid #555;"><i class="fa fa-search"></i></button>
                 }
             </div>
@@ -57,11 +57,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - BitcoinBlockExplorer - Vlatka Laušić 
-        </div>
-    </footer>
+    
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

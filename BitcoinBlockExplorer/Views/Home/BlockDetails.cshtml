@@ -8,8 +8,8 @@
 
 <div>
     <br /><br />
-          <h4>Block <span style="color: #1E90FF">@Model.height</span></h4>
-          
+    <h4><b>Block - <span style="color: #1E90FF">@Model.height</span></b></h4>
+
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -128,11 +128,84 @@
         </dd>
     </dl>
 </div>
+<br />
+<h5><b>Block Transactions</b></h5>
+<hr />
+
+@for (int i = 0; i < Model.transactions.Count; i++)
+{
+<div>
+
+    <div style="color:orangered;"><b>Hash: </b>@Html.DisplayFor(model => model.transactions[i].txid)</div>
+    <br />
+
+    <div class="leftDiv">
+        <p><b>INPUTS</b>&nbsp;</p>
+        @for (int j = 0; j < Model.transactions[i].vin.Count; j++)
+        {
+            var x = Decimal.Round(Model.transactions[i].vin[j].value * ViewBag.USD, 2, MidpointRounding.AwayFromZero);
+            @Html.DisplayFor(model => model.transactions[i].vin[j].address) <span style="background-color:lightgreen;color:black;border:solid">-></span>
+            <span style="color:dimgrey">  @Model.transactions[i].vin[j].value BTC / @x USD</span>
+
+            <br />
+        }<br /><br />
+
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <b> TOTAL INPUT: </b> @Model.transactions[i].ukupnoUlaz BTC / @Decimal.Round(Model.transactions[i].ukupnoUlaz * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+        <br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <b>FEE: </b> @Model.transactions[i].fee BTC / @Decimal.Round(Model.transactions[i].fee * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+
+
+    </div>
+
+    <div class="rightDiv">
+        <p><b>OUTPUTS</b>&nbsp;</p>
+        @for (int j = 0; j < Model.transactions[i].vout.Count; j++)
+        {
+            var y = Decimal.Round(Model.transactions[i].vout[j].value * ViewBag.USD, 2, MidpointRounding.AwayFromZero);
+            @Html.DisplayFor(model => model.transactions[i].vout[j].scriptPubKey.addresses) <span style="background-color:yellow;color:black;border:solid">-></span>
+            <span style="color:dimgrey"> @Html.DisplayFor(model => model.transactions[i].vout[j].value) BTC / @y USD </span>
+
+            <br />
+        }
+        <br /><br />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <b>TOTAL OUTPUT:</b> @Model.transactions[i].ukupnoIzlaz BTC / @Decimal.Round(Model.transactions[i].ukupnoIzlaz * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+    </div>
+    
+</div>
+
+    <br />
+    <br />
+    <br />
+ 
+    <hr style="clear:both;">
+
+
+}
+
 
 
 <style type="text/css">
     dd {
-        color: darkorange;
-      
+        color: orangered;
     }
+
+    .leftDiv {
+        overflow: hidden;
+        height: 1%;
+        width: 50%;
+        float: left;
+        background-color: lightyellow;
+    }
+
+    .rightDiv {
+        overflow: hidden;
+        height: 1%;
+        width: 50%;
+        float: right;
+        background-color: lightgreen;
+    }
+
 </style>
