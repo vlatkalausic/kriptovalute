@@ -1,0 +1,253 @@
+﻿@model BitcoinBlockExplorer.Models.Transaction
+
+@{
+    ViewData["Title"] = "TransactionDetails";
+}
+
+<div>
+    <br /><br />
+    <h4><b>Transaction - <span style="color: #1E90FF">@Model.hash</span></b></h4>
+
+    <hr />
+    <br />
+
+
+
+    <div>
+
+
+        <div class="leftDiv">
+            <p><b>INPUTS</b>&nbsp;</p>
+            @for (int j = 0; j < Model.vin.Count; j++)
+            {
+                var x = Decimal.Round(Model.vin[j].value * ViewBag.USD, 2, MidpointRounding.AwayFromZero);
+                @Html.DisplayFor(model => model.vin[j].address) <span style="background-color:lightgreen;color:black;border:solid">-></span>
+                <span style="color:dimgrey">  @Model.vin[j].value BTC / @x USD</span>
+
+                <br />
+            }<br /><br />
+
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <b> TOTAL INPUT: </b> @Model.ukupnoUlaz BTC / @Decimal.Round(Model.ukupnoUlaz * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+            <br />
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <b>FEE: </b> @Model.fee BTC / @Decimal.Round(Model.fee * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+
+
+        </div>
+
+        <div class="rightDiv">
+            <p><b>OUTPUTS</b>&nbsp;</p>
+            @for (int j = 0; j < Model.vout.Count; j++)
+            {
+                var y = Decimal.Round(Model.vout[j].value * ViewBag.USD, 2, MidpointRounding.AwayFromZero);
+                @Html.DisplayFor(model => model.vout[j].scriptPubKey.addresses) <span style="background-color:yellow;color:black;border:solid">-></span>
+                <span style="color:dimgrey"> @Html.DisplayFor(model => model.vout[j].value) BTC / @y USD </span>
+
+                <br />
+            }
+            <br /><br />
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <b>TOTAL OUTPUT:</b> @Model.ukupnoIzlaz BTC / @Decimal.Round(Model.ukupnoIzlaz * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <hr style="clear:both;">
+
+
+    <br />
+    <br />
+    <br />
+
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            Hash:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.hash)
+        </dd>
+        <dt class="col-sm-2">
+            Status:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.status)
+        </dd>
+        <dt class="col-sm-2">
+            Received time:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.time)
+        </dd>
+        <dt class="col-sm-2">
+            Size:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.size) bytes
+        </dd>
+        <dt class="col-sm-2">
+            Weight:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+        <dt class="col-sm-2">
+            Locktime:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.locktime)
+        </dd>
+        <dt class="col-sm-2">
+            Included in block:
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.includedInBlock == "Yes")
+            {
+            <a href="https://localhost:44375/?search=@Model.blockh">@Model.blockh</a>
+            }else
+            {
+                <text>No</text>
+            }
+</dd>
+        <dt class="col-sm-2">
+            Confirmations:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.conf)
+        </dd>
+        <dt class="col-sm-2">
+            Total input:
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ukupnoUlaz BTC / @Decimal.Round(Model.ukupnoUlaz * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+        </dd>
+        <dt class="col-sm-2">
+            Total output:
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ukupnoIzlaz BTC / @Decimal.Round(Model.ukupnoIzlaz * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+        </dd>
+        <dt class="col-sm-2">
+            Fees:
+        </dt>
+        <dd class="col-sm-10">
+            @Model.fee BTC / @Decimal.Round(Model.fee * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+        </dd>
+    </dl>
+</div>
+<hr />
+
+<div>
+    <br /><br />
+    <h4 style="color: #f0f70d"><b>Inputs</b></h4>
+
+    <hr />    
+    <dl class="row">
+        @for (int m = 0; m < Model.vin.Count; m++)
+        {
+
+            <dt class="col-sm-2">
+                Index:
+            </dt>
+            <dd class="col-sm-10">
+                <b>@m</b>
+            </dd>
+            <dt class="col-sm-2">
+                Address:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.vin[m].address
+            </dd>
+            <dt class="col-sm-2">
+                Value:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.vin[m].value BTC / @Decimal.Round(Model.vin[m].value * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+            </dd>
+            <dt class="col-sm-2">
+                Coinbase:
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.vin[m].coinbase == true)
+                {
+                    <text>Yes</text>
+                }
+                else
+                {
+                    <text>No</text>
+                }
+            </dd>
+
+
+        }
+    </dl>
+    <br />
+</div>
+
+<div>
+
+    <h4 style="color: green"><b>Outputs</b></h4>
+
+    <hr />
+    <dl class="row">
+        @for (int m = 0; m < Model.vout.Count; m++)
+        {
+
+            <dt class="col-sm-2">
+                Index:
+            </dt>
+            <dd class="col-sm-10">
+                <b>@m</b>
+            </dd>
+            <dt class="col-sm-2">
+                Address:
+            </dt>
+            <dd class="col-sm-10">
+                @for (int y = 0; y < Model.vout[m].scriptPubKey.addresses.Count; y++)
+                {
+                    @Model.vout[m].scriptPubKey.addresses[y]
+                }
+            </dd>
+            <dt class="col-sm-2">
+                Value:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.vout[m].value BTC / @Decimal.Round(Model.vout[m].value * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
+            </dd>
+
+           
+            
+
+        }
+
+    </dl>
+
+    <br /><hr />
+</div>
+
+
+<style type="text/css">
+    dd {
+        color: lightslategray;
+    }
+    .leftDiv {
+        overflow: hidden;
+        height: 1%;
+        width: 50%;
+        float: left;
+        background-color: lightyellow;
+    }
+
+    .rightDiv {
+        overflow: hidden;
+        height: 1%;
+        width: 50%;
+        float: right;
+        background-color: lightgreen;
+    }
+</style>

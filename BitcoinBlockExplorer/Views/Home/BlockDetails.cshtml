@@ -100,32 +100,33 @@
             Transaction volume:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.transactionVolume)
+            @Model.transactionVolume BTC / @Decimal.Round(Model.transactionVolume * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
         </dd>
         <dt class="col-sm-2">
             Block reward:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.blockReward)
+            @Model.blockReward BTC / @Decimal.Round(Model.blockReward * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
         </dd>
         <dt class="col-sm-2">
             Fee reward:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.feeReward)
+            @Model.feeReward BTC / @Decimal.Round(Model.feeReward * ViewBag.USD, 2, MidpointRounding.AwayFromZero) USD
         </dd>
         <dt class="col-sm-2">
             Previous block hash:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.previousblockhash)
+            <a href="https://localhost:44375/?search=@Model.previousblockhash">@Html.DisplayFor(model => model.previousblockhash)</a>
+            
         </dd>
         <dt class="col-sm-2">
             Next block hash:
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.nextblockhash)
-        </dd>
+            <a href="https://localhost:44375/?search=@Model.nextblockhash">@Html.DisplayFor(model => model.nextblockhash)</a>
+</dd>
     </dl>
 </div>
 <br />
@@ -136,7 +137,7 @@
 {
 <div>
 
-    <div style="color:orangered;"><b>Hash: </b>@Html.DisplayFor(model => model.transactions[i].txid)</div>
+    <div style="color: #1E90FF;"><b>Hash: </b><a href="https://localhost:44375/?search=@Model.transactions[i].txid">@Html.DisplayFor(model => model.transactions[i].txid)</a></div>
     <br />
 
     <div class="leftDiv">
@@ -189,7 +190,7 @@
 
 <style type="text/css">
     dd {
-        color: orangered;
+        color: lightslategray;
     }
 
     .leftDiv {

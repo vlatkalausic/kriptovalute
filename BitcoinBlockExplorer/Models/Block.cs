@@ -48,15 +48,29 @@ namespace BitcoinBlockExplorer.Models
             weight= long.Parse(json["result"]["weight"].ToString());
             size= long.Parse(json["result"]["size"].ToString());
             nonce = long.Parse(json["result"]["nonce"].ToString());
-            transactions = t; //coinbase???????????????
-
+            transactions = t;
+            var br = transactions.Count();
+            foreach (int i in Enumerable.Range(0, br))
+            {
+                if (i != 0)
+                {
+                    transactionVolume += transactions[i].ukupnoIzlaz;
+                    feeReward += transactions[i].fee;
+                }
+            }
+            blockReward = transactions[0].ukupnoIzlaz;
+            previousblockhash= json["result"]["previousblockhash"].ToString();
+            String nb = json["result"].ToString();
+            if (nb.IndexOf("nextblockhash") > -1)
+            {
+                nextblockhash = json["result"]["nextblockhash"].ToString();
+            }
         }
         public Block(JObject json)
         {
             hash = json["result"]["hash"].ToString();
             confirmations = Int32.Parse(json["result"]["confirmations"].ToString());
             time = DateTimeOffset.FromUnixTimeSeconds(long.Parse(json["result"]["time"].ToString())).UtcDateTime.ToLocalTime();
-            miner = json["result"]["tx"][0]["vout"][0]["scriptPubKey"]["addresses"][0].ToString();
             height = Int32.Parse(json["result"]["height"].ToString());
             nTx = Int32.Parse(json["result"]["nTx"].ToString());
             difficulty = double.Parse(json["result"]["difficulty"].ToString());
@@ -70,5 +84,6 @@ namespace BitcoinBlockExplorer.Models
             
 
         }
+        
     }
 }
