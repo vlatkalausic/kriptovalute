@@ -127,6 +127,7 @@ namespace BitcoinBlockExplorer.Controllers
                 if (string.IsNullOrEmpty(getrawtransaction3["error"].ToString())){
 
                     Block block1 = null;
+                    //radi brzine iduci if...
                     if (search == "cf373da6b9081993a2acc011e9fdcc47fc38c138bd3a7b1e9749762a54fc9251" || search=="7c4694ee86401ca39acdd859f25b439d533c9d5f3cab53c280d72506febfecaf")
                     {
                         JObject s = JObject.Parse(await blockchain.GetBlockHash(999999));
@@ -216,7 +217,6 @@ namespace BitcoinBlockExplorer.Controllers
             int recentb = Int32.Parse(JObject.Parse(await blockchain.GetBlockCount())["result"].ToString());
             ViewBag.rb = recentb;
             var getrawmempool = JObject.Parse(await blockchain.GetRawMempool(ReturnFormat.ArrayOfTransactionIds));
-            var ddd = await blockchain.GetRawMempool(ReturnFormat.ArrayOfTransactionIds);
             int count = getrawmempool["result"].Count();
             List<string> listart = new List<string>();
             foreach (int c in Enumerable.Range(0, count))
